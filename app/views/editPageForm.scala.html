@@ -1,0 +1,32 @@
+@(id: Long, pageForm: Form[Page_model])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main {
+    
+    <h1>Edit Page</h1>
+    
+    @form(routes.Page.update(id)) {
+        
+        <fieldset>
+        
+            @inputText(pageForm("title"), '_label -> "Title")
+            @inputText(pageForm("template"), '_label -> "Template")
+            @inputText(pageForm("options"), '_label -> "Options")
+        
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this computer" class="btn primary"> or 
+            <a href="@routes.Place.list()" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+    @form(routes.Page.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this page" class="btn danger">
+    }
+    
+}

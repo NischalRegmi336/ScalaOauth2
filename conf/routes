@@ -1,0 +1,71 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Default path will just redirect to the place list
+GET     /                           controllers.Application.index
+GET     /wifi                           controllers.Application.index
+
+# places list (look at the default values for pagination parameters)
+GET     /allplaces				 controllers.Place.index
+GET     /places                  controllers.Place.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
+
+# Add place
+GET     /places/new              controllers.Place.create
+POST    /places                  controllers.Place.save
+
+# Edit existing place
+GET     /places/:id              controllers.Place.edit(id:Long)
+POST    /places/:id              controllers.Place.update(id:Long)
+
+# Delete a place
+POST    /places/:id/delete       controllers.Place.delete(id:Long)
+GET     /places/:id/delete       controllers.Place.delete(id:Long)
+
+
+
+# Pages list (look at the default values for pagination parameters)
+GET     /allpages		 		 controllers.Page.index
+GET     /pages                   controllers.Page.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
+
+# Add page
+GET     /pages/new               controllers.Page.create
+POST    /pages                   controllers.Page.save
+
+# Edit existing page
+GET     /pages/:id               controllers.Page.edit(id:Long)
+POST    /pages/:id               controllers.Page.update(id:Long)
+
+# Delete a page
+POST    /pages/:id/delete        controllers.Page.delete(id:Long)
+GET     /pages/:id/delete        controllers.Page.delete(id:Long)
+
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+# ~~~~
+# Login page
+GET     /login                      securesocial.controllers.LoginPage.login
+GET     /logout                     securesocial.controllers.LoginPage.logout
+
+# User Registration and password handling
+GET     /signup                     securesocial.controllers.Registration.startSignUp
+POST    /signup                     securesocial.controllers.Registration.handleStartSignUp
+GET     /signup/:token              securesocial.controllers.Registration.signUp(token)
+POST    /signup/:token              securesocial.controllers.Registration.handleSignUp(token)
+GET     /reset                      securesocial.controllers.Registration.startResetPassword
+POST    /reset                      securesocial.controllers.Registration.handleStartResetPassword
+GET     /reset/:token               securesocial.controllers.Registration.resetPassword(token)
+POST    /reset/:token               securesocial.controllers.Registration.handleResetPassword(token)
+GET     /password                   securesocial.controllers.PasswordChange.page
+POST    /password                   securesocial.controllers.PasswordChange.handlePasswordChange
+
+# Providers entry points
+GET     /authenticate/:provider     securesocial.controllers.ProviderController.authenticate(provider)
+POST    /authenticate/:provider     securesocial.controllers.ProviderController.authenticateByPost(provider)
+GET     /not-authorized             securesocial.controllers.ProviderController.notAuthorized

@@ -1,0 +1,44 @@
+@(pageForm: Form[Page_model])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main {
+    
+    <h1>Edit place</h1>
+    
+    @form(routes.Page.save) {
+        
+        <fieldset>
+        
+            @inputText(pageForm("title"), '_label -> "Title")
+            @inputText(pageForm("template"), '_label -> "Template")
+            <label>Options:</label>
+            <div class="input">
+				<label>note <input type="checkbox" name="options[]" value="0">
+				</label> <label>About US <input type="checkbox" name="options[]"
+					value="1">
+				</label> <label>Facebook <input type="checkbox" name="options[]"
+					value="2">
+				</label> <label>Twitter <input type="checkbox" name="options[]"
+					value="3">
+				</label> <label>Hotmail <input type="checkbox" name="options[]"
+					value="4">
+				</label> <label>Something <input type="checkbox" name="options[]"
+					value="5">
+				</label>
+			</div>
+			
+		            
+        
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this page" class="btn primary"> or 
+            <a href="@routes.Page.list()" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}

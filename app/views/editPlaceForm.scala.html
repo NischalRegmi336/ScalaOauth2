@@ -1,0 +1,32 @@
+@(id: Long, placeForm: Form[Place])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@main {
+    
+    <h1>Edit place</h1>
+    
+    @form(routes.Place.update(id)) {
+        
+        <fieldset>
+        
+            @inputText(placeForm("title"), '_label -> "Title")
+            @inputText(placeForm("url_key"), '_label -> "Url Key")
+            @inputText(placeForm("page_id"), '_label -> "page id")
+        
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this computer" class="btn primary"> or 
+            <a href="@routes.Place.list()" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+    @form(routes.Place.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this computer" class="btn danger">
+    }
+    
+}
